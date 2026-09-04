@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, ArrowDown, Globe, Code2, CreditCard } from 'lucide-react';
+import { Lock, ArrowDown, Globe, Code2, CreditCard, Sparkles } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
+import { CyberTiltCard } from '../components/CyberTiltCard';
 
 interface Section01HeroProps {
   onScrollToExplore: () => void;
@@ -45,7 +46,7 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
     <section id="hero" className="relative flex flex-col justify-between py-2 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
       
       {/* Volumetric Emerald Horizon Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[550px] bg-gradient-to-b from-emerald-500/15 via-teal-500/8 to-transparent rounded-full blur-[170px] pointer-events-none -z-10 animate-pulse-glow" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[550px] bg-gradient-to-b from-emerald-500/20 via-teal-500/10 to-transparent rounded-full blur-[170px] pointer-events-none -z-10 animate-pulse-glow" />
 
       {/* Cyber Perspective Grid Overlay */}
       <div className="absolute inset-0 bg-cyber-grid opacity-35 pointer-events-none -z-10 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_75%)]" />
@@ -79,7 +80,7 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
           />
         </div>
 
-        {/* Cinematic Subtitle with Relocated Authentic Tagline */}
+        {/* Cinematic Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -99,7 +100,7 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
           transition={{ duration: 0.9, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
           className="mt-12 max-w-5xl mx-auto w-full"
         >
-          <div className="relative rounded-3xl p-1 bg-gradient-to-b from-slate-700/80 via-emerald-500/25 to-slate-900/80 shadow-[0_30px_100px_rgba(0,0,0,0.95)]">
+          <div className="relative rounded-3xl p-1 bg-gradient-to-b from-slate-700/80 via-emerald-500/30 to-slate-900/80 shadow-[0_30px_100px_rgba(0,0,0,0.95)]">
             
             {/* Specular Inner Console Frame */}
             <div className="rounded-[22px] overflow-hidden bg-[#070b14]/95 backdrop-blur-2xl border border-slate-800 text-left">
@@ -149,13 +150,13 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     
                     {/* Core 01: URL AI */}
-                    <div className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-cyan-500/50 transition-all group">
+                    <CyberTiltCard glowColor="cyan" className="p-5">
                       <div className="flex items-center justify-between font-mono text-xs mb-3">
                         <div className="flex items-center gap-2">
                           <Globe className="w-4 h-4 text-cyan-400" />
                           <span className="font-bold text-white uppercase">URL Model</span>
                         </div>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold">
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30">
                           SVM 96%
                         </span>
                       </div>
@@ -166,16 +167,16 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
                         <span>ROC-AUC: 0.9923</span>
                         <span>498K TRAIN</span>
                       </div>
-                    </div>
+                    </CyberTiltCard>
 
                     {/* Core 02: HTML AI */}
-                    <div className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-emerald-500/50 transition-all group">
+                    <CyberTiltCard glowColor="emerald" className="p-5">
                       <div className="flex items-center justify-between font-mono text-xs mb-3">
                         <div className="flex items-center gap-2">
                           <Code2 className="w-4 h-4 text-emerald-400" />
                           <span className="font-bold text-white uppercase">HTML Model</span>
                         </div>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
                           XGBOOST 96%
                         </span>
                       </div>
@@ -186,16 +187,16 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
                         <span>ROC-AUC: 0.9910</span>
                         <span>0% LEAKAGE</span>
                       </div>
-                    </div>
+                    </CyberTiltCard>
 
                     {/* Core 03: Payment Attack Surface */}
-                    <div className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-amber-500/50 transition-all group">
+                    <CyberTiltCard glowColor="amber" className="p-5">
                       <div className="flex items-center justify-between font-mono text-xs mb-3">
                         <div className="flex items-center gap-2">
                           <CreditCard className="w-4 h-4 text-amber-400" />
                           <span className="font-bold text-white uppercase">Payment AI</span>
                         </div>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
                           30 VECTORS
                         </span>
                       </div>
@@ -206,7 +207,7 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
                         <span>PROVIDER MATCH</span>
                         <span>ACTIVE</span>
                       </div>
-                    </div>
+                    </CyberTiltCard>
 
                   </div>
                 ) : (
@@ -223,11 +224,13 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
                 {/* Bottom Telemetry Status Strip */}
                 <div className="bg-[#030509] p-4 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
                   <div className="flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
                     <span className="text-slate-400">CORPUS:</span>
                     <span className="text-emerald-400 font-bold">PhreshPhish (666K URLs)</span>
                   </div>
 
-                  <div className="text-slate-500 text-[11px] font-mono">
+                  <div className="text-slate-400 text-[11px] font-mono flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                     LINEAR SVM + XGBOOST ARCHITECTURE
                   </div>
                 </div>

@@ -19,7 +19,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   const words = title.split(' ');
 
   return (
-    <div className={`mb-6 sm:mb-8 md:mb-10 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : 'text-left max-w-3xl'}`}>
+    <div className={`mb-5 sm:mb-7 md:mb-8 ${align === 'center' ? 'text-center mx-auto max-w-3xl' : 'text-left max-w-3xl'}`}>
       
       {/* Top Section Tag Pill with Kinetic Decryption Pulse */}
       <motion.div
@@ -29,7 +29,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         className={`inline-flex items-center gap-2 mb-2.5 ${align === 'center' ? 'justify-center' : 'justify-start'}`}
       >
         <span className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 shadow-[0_0_12px_rgba(16,185,129,0.15)] flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
           SECTION {number}
         </span>
         <span className="text-slate-600 font-mono text-xs">•</span>
@@ -39,7 +39,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       </motion.div>
 
       {/* Kinetic Staggered Heading */}
-      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3 leading-[1.14]">
+      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2.5 leading-[1.14]">
         {words.map((word, i) => (
           <motion.span
             key={i}
@@ -50,7 +50,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
               delay: 0.05 + i * 0.035,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="inline-block mr-[0.28em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-300"
+            className="inline-block mr-[0.28em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-300 drop-shadow-[0_2px_10px_rgba(255,255,255,0.1)]"
           >
             {word}
           </motion.span>
@@ -69,15 +69,14 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         </motion.p>
       )}
 
-      {/* Kinetic Laser Accent Beam */}
+      {/* Subtle Atmospheric Accent Shimmer */}
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className={`mt-4 flex items-center gap-2 origin-left ${align === 'center' ? 'justify-center origin-center' : 'justify-start'}`}
+        className={`mt-3.5 flex items-center gap-2 origin-left ${align === 'center' ? 'justify-center origin-center' : 'justify-start'}`}
       >
-        <div className="h-[2px] w-14 bg-gradient-to-r from-emerald-500/80 via-teal-400 to-transparent rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
-        <div className="h-[2px] w-3 bg-emerald-500/30 rounded-full" />
+        <div className="h-[2px] w-12 bg-gradient-to-r from-emerald-500/60 via-teal-400/40 to-transparent rounded-full" />
       </motion.div>
     </div>
   );

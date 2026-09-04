@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { VerdictLogo } from './VerdictLogo';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -36,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
       {/* Floating Island Navigation */}
       <header className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-300 ${scrolled ? 'top-3' : 'top-4'
         }`}>
-        <nav className="relative rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between shadow-[0_16px_40px_rgba(0,0,0,0.65)] border border-slate-700/60 bg-[#070a12]/85 backdrop-blur-2xl">
+        <nav className="relative rounded-full px-3.5 sm:px-5 py-2 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-slate-700/60 bg-[#070a12]/85 backdrop-blur-2xl">
 
           {/* Brand & Emblem */}
           <button
@@ -44,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             className="flex items-center gap-3 cursor-pointer group bg-transparent border-0 p-0 text-left outline-none"
             onClick={() => onNavigate('hero')}
           >
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 group-hover:border-emerald-400 group-hover:scale-105 transition-all shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+            <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 group-hover:border-emerald-400 group-hover:scale-105 transition-all shadow-[0_0_14px_rgba(16,185,129,0.25)]">
               <VerdictLogo size={18} />
             </div>
 
@@ -55,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             </div>
           </button>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links with Magnetic Floating Active Pill */}
           <div className="hidden md:flex items-center gap-1 bg-slate-900/60 p-1 rounded-full border border-slate-800/80">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
@@ -63,11 +64,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
                 <button
                   key={item.id}
                   onClick={() => onNavigate(item.id)}
-                  className={`px-3.5 py-1.5 text-xs font-mono rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
-                    ? 'bg-emerald-500 text-slate-950 font-bold shadow-[0_0_14px_rgba(16,185,129,0.4)]'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50 font-medium'
-                    }`}
+                  className={`relative px-3.5 py-1.5 text-xs font-mono rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap z-10 ${
+                    isActive
+                      ? 'text-slate-950 font-bold'
+                      : 'text-slate-400 hover:text-white font-medium'
+                  }`}
                 >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavPill"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      className="absolute inset-0 bg-emerald-400 rounded-full shadow-[0_0_14px_rgba(16,185,129,0.5)] -z-10"
+                    />
+                  )}
                   {item.label}
                 </button>
               );
@@ -78,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           <div className="flex items-center gap-2">
             <button
               onClick={() => onNavigate('demo')}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/60 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold text-emerald-300 bg-emerald-500/15 border border-emerald-500/35 hover:bg-emerald-500/25 hover:border-emerald-400/70 hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] transition-all cursor-pointer"
             >
               <span>Demo</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
