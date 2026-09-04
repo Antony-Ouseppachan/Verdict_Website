@@ -28,7 +28,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`inline-flex items-center gap-2 mb-2.5 ${align === 'center' ? 'justify-center' : 'justify-start'}`}
       >
-        <span className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 shadow-[0_0_12px_rgba(16,185,129,0.15)] flex items-center gap-1.5">
+        <span className="font-mono text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 shadow-[0_0_12px_rgba(16,185,129,0.12)] flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
           SECTION {number}
         </span>
@@ -39,7 +39,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       </motion.div>
 
       {/* Kinetic Staggered Heading */}
-      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2.5 leading-[1.14]">
+      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2.5 leading-[1.12]">
         {words.map((word, i) => (
           <motion.span
             key={i}
@@ -50,7 +50,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
               delay: 0.05 + i * 0.035,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="inline-block mr-[0.28em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-300 drop-shadow-[0_2px_10px_rgba(255,255,255,0.1)]"
+            className="inline-block mr-[0.28em] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-300 drop-shadow-[0_2px_12px_rgba(255,255,255,0.08)]"
           >
             {word}
           </motion.span>
@@ -63,7 +63,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed font-sans max-w-2xl mx-auto"
+          className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed font-sans max-w-2xl mx-auto font-normal"
         >
           {subtitle}
         </motion.p>
@@ -76,7 +76,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className={`mt-3.5 flex items-center gap-2 origin-left ${align === 'center' ? 'justify-center origin-center' : 'justify-start'}`}
       >
-        <div className="h-[2px] w-12 bg-gradient-to-r from-emerald-500/60 via-teal-400/40 to-transparent rounded-full" />
+        <div className="h-[1.5px] w-12 bg-gradient-to-r from-emerald-500/50 via-teal-400/30 to-transparent rounded-full" />
       </motion.div>
     </div>
   );

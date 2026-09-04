@@ -50,21 +50,21 @@ export const InteractiveCanvas: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // Particle Palette
-    const colors = ['rgba(16, 185, 129, ', 'rgba(6, 182, 212, ', 'rgba(20, 184, 166, '];
+    // Particle Palette with refined subtle alphas
+    const colors = ['rgba(16, 185, 129, ', 'rgba(56, 189, 248, ', 'rgba(20, 184, 166, '];
     let particles: Particle[] = [];
 
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.min(Math.floor((width * height) / 18000), 75);
+      const particleCount = Math.min(Math.floor((width * height) / 22000), 55);
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.45,
-          vy: (Math.random() - 0.5) * 0.45,
-          radius: Math.random() * 1.6 + 0.8,
-          baseAlpha: Math.random() * 0.4 + 0.15,
+          vx: (Math.random() - 0.5) * 0.28,
+          vy: (Math.random() - 0.5) * 0.28,
+          radius: Math.random() * 1.4 + 0.6,
+          baseAlpha: Math.random() * 0.25 + 0.08,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
@@ -75,8 +75,8 @@ export const InteractiveCanvas: React.FC = () => {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Connect Constellation Lines
-      const maxDistance = 140;
+      // Connect Constellation Lines with delicate luxury stroke
+      const maxDistance = 150;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -84,58 +84,51 @@ export const InteractiveCanvas: React.FC = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.12;
+            const alpha = (1 - dist / maxDistance) * 0.07;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
-            ctx.lineWidth = 0.75;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
       }
 
-      // Render & Update Particles with Mouse Physics
+      // Render & Update Particles with Gentle Proximity Physics
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Move
         p.x += p.vx;
         p.y += p.vy;
 
-        // Bounce on borders
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
 
-        // Mouse Proximity Interaction
         const dx = mouseRef.current.x - p.x;
         const dy = mouseRef.current.y - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         let alpha = p.baseAlpha;
         if (dist < mouseRef.current.radius) {
-          const force = (1 - dist / mouseRef.current.radius) * 1.5;
+          const force = (1 - dist / mouseRef.current.radius) * 0.9;
           p.x -= (dx / dist) * force;
           p.y -= (dy / dist) * force;
-          alpha = Math.min(p.baseAlpha + 0.5, 0.85);
+          alpha = Math.min(p.baseAlpha + 0.3, 0.65);
 
-          // Draw interactive synaptic connector to mouse
+          // Subtle connection to mouse
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-          ctx.strokeStyle = `rgba(52, 211, 153, ${(1 - dist / mouseRef.current.radius) * 0.25})`;
-          ctx.lineWidth = 0.6;
+          ctx.strokeStyle = `rgba(52, 211, 153, ${(1 - dist / mouseRef.current.radius) * 0.15})`;
+          ctx.lineWidth = 0.5;
           ctx.stroke();
         }
 
-        // Draw Particle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${alpha})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(16, 185, 129, 0.6)';
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
       animationFrameId = requestAnimationFrame(render);
