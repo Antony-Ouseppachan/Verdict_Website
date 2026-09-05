@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { VerdictLogo } from '../components/VerdictLogo';
-import { ShieldCheck, ShieldAlert, Play, Pause, RotateCcw, Lock, Globe, Code2, CreditCard, CheckCircle2, AlertTriangle, XCircle, Download, ArrowRight } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, Play, Pause, RotateCcw, Lock, Globe, Code2, CreditCard, CheckCircle2, AlertTriangle, XCircle, Download, ArrowRight, Sparkles } from 'lucide-react';
+import { useVerdictChat } from '../context/VerdictChatContext';
 
 interface Section18Props {
   onNavigateToDownload?: () => void;
@@ -129,6 +130,7 @@ export const Section18InteractiveDemo: React.FC<Section18Props> = ({ onNavigateT
   const [currentTypedUrl, setCurrentTypedUrl] = useState<string>('');
   const [scanStep, setScanStep] = useState<number>(0); // 0: typing, 1: url scan, 2: html scan, 3: payment scan, 4: verdict
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
+  const { askProjectTopic } = useVerdictChat();
 
   const scenario = SCENARIOS[activeScenarioIndex] || SCENARIOS[0];
 
@@ -225,8 +227,17 @@ export const Section18InteractiveDemo: React.FC<Section18Props> = ({ onNavigateT
             </button>
           </div>
 
-          {/* Playback Controls */}
+          {/* Playback Controls & AI Explanation Trigger */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => askProjectTopic('How does the multimodal pipeline distinguish an authentic gateway from a spoofed phishing clone?')}
+              className="px-3.5 py-1.5 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono text-xs flex items-center gap-1.5 cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.2)] transition-all"
+              title="Ask Verdict AI to explain how this verification works"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+              <span>Explain with AI</span>
+            </button>
+
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
               className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white font-mono text-xs flex items-center gap-1.5 cursor-pointer"
@@ -347,15 +358,28 @@ export const Section18InteractiveDemo: React.FC<Section18Props> = ({ onNavigateT
                   </span>
                 </div>
 
-                {scanStep >= 4 && (
-                  <span className={`font-mono text-xs px-3 py-1 rounded-full font-bold uppercase ${
-                    scenario.type === 'SAFE'
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                      : 'bg-red-500/20 text-red-300 border border-red-500/40'
-                  }`}>
-                    {scenario.verdict}
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {scanStep >= 4 && (
+                    <button
+                      onClick={() => askProjectTopic('Explain how the multimodal pipeline verifies payment gateways and detects phishing clones')}
+                      className="px-3 py-1 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/50 text-emerald-300 font-mono text-[11px] font-bold flex items-center gap-1.5 cursor-pointer shadow-[0_0_12px_rgba(16,185,129,0.2)] transition-all"
+                      title="Ask Verdict AI how this verification works"
+                    >
+                      <Sparkles className="w-3 h-3 text-emerald-400" />
+                      <span>Ask AI Analyst</span>
+                    </button>
+                  )}
+
+                  {scanStep >= 4 && (
+                    <span className={`font-mono text-xs px-3 py-1 rounded-full font-bold uppercase ${
+                      scenario.type === 'SAFE'
+                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                        : 'bg-red-500/20 text-red-300 border border-red-500/40'
+                    }`}>
+                      {scenario.verdict}
+                    </span>
+                  )}
+                </div>
               </div>
 
               <h3 className={`font-display text-2xl md:text-3xl font-black uppercase tracking-tight ${
@@ -372,6 +396,7 @@ export const Section18InteractiveDemo: React.FC<Section18Props> = ({ onNavigateT
                 )}
               </div>
             </div>
+
 
             {/* Granular Evidentiary Findings List */}
             {scanStep >= 4 && (

@@ -5,6 +5,9 @@ import { CyberBackgroundCanvas } from './components/CyberBackgroundCanvas';
 import { SitePreloader } from './components/SitePreloader';
 import { MorphXFilter } from './components/MorphXFilter';
 import { MorphXFullpage, type SectionItem } from './components/MorphXFullpage';
+import { VerdictChatProvider } from './context/VerdictChatContext';
+import { VerdictChatbot } from './components/chat/VerdictChatbot';
+import { ChatTriggerButton } from './components/chat/ChatTriggerButton';
 
 // 20 Complete Presentation & Deployment Sections
 import { Section01Hero } from './sections/Section01Hero';
@@ -149,31 +152,40 @@ export function App() {
   );
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#05070d] text-slate-100 selection:bg-emerald-500/20 selection:text-emerald-300 relative font-sans">
-      
-      {/* MorphX Shader Filter Layer */}
-      <MorphXFilter />
+    <VerdictChatProvider>
+      <div className="h-screen w-screen overflow-hidden bg-[#05070d] text-slate-100 selection:bg-emerald-500/20 selection:text-emerald-300 relative font-sans">
+        
+        {/* MorphX Shader Filter Layer */}
+        <MorphXFilter />
 
-      {/* Site Preloader Screen */}
-      <AnimatePresence mode="wait">
-        {isLoading && <SitePreloader onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
+        {/* Site Preloader Screen */}
+        <AnimatePresence mode="wait">
+          {isLoading && <SitePreloader onComplete={() => setIsLoading(false)} />}
+        </AnimatePresence>
 
-      {/* Interactive Cyber Background Particle Canvas */}
-      <CyberBackgroundCanvas />
+        {/* Interactive Cyber Background Particle Canvas */}
+        <CyberBackgroundCanvas />
 
-      {/* Pinned Fixed Floating Island Header */}
-      <Navbar activeSection={activeSection} onNavigate={(secId) => setActiveSection(secId)} />
+        {/* Pinned Fixed Floating Island Header */}
+        <Navbar activeSection={activeSection} onNavigate={(secId) => setActiveSection(secId)} />
 
-      {/* Fullpage MorphX Transition Container */}
-      <MorphXFullpage
-        sections={sections}
-        activeSectionId={activeSection}
-        onSectionChange={(id) => setActiveSection(id)}
-      />
+        {/* Fullpage MorphX Transition Container */}
+        <MorphXFullpage
+          sections={sections}
+          activeSectionId={activeSection}
+          onSectionChange={(id) => setActiveSection(id)}
+        />
 
-    </div>
+        {/* Verdict Intelligence AI Security Assistant */}
+        <VerdictChatbot />
+
+        {/* Floating SOC Assistant Trigger Button */}
+        <ChatTriggerButton />
+
+      </div>
+    </VerdictChatProvider>
   );
 }
 
 export default App;
+
