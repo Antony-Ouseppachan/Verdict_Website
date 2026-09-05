@@ -6,7 +6,7 @@ import { SitePreloader } from './components/SitePreloader';
 import { MorphXFilter } from './components/MorphXFilter';
 import { MorphXFullpage, type SectionItem } from './components/MorphXFullpage';
 
-// 19 Complete Presentation Sections
+// 20 Complete Presentation & Deployment Sections
 import { Section01Hero } from './sections/Section01Hero';
 import { Section02Problem } from './sections/Section02Problem';
 import { Section03Motivation } from './sections/Section03Motivation';
@@ -25,7 +25,8 @@ import { Section15UseCase } from './sections/Section15UseCase';
 import { Section16Limitations } from './sections/Section16Limitations';
 import { Section17FutureWork } from './sections/Section17FutureWork';
 import { Section18InteractiveDemo } from './sections/Section18InteractiveDemo';
-import { Section19FinalStatement } from './sections/Section19FinalStatement';
+import { Section19DownloadHub } from './sections/Section19DownloadHub';
+import { Section20FinalStatement } from './sections/Section20FinalStatement';
 
 export function App() {
   const [activeSection, setActiveSection] = useState<string>('hero');
@@ -36,7 +37,12 @@ export function App() {
       {
         id: 'hero',
         name: 'Overview',
-        component: <Section01Hero onScrollToExplore={() => setActiveSection('problem')} />,
+        component: (
+          <Section01Hero
+            onScrollToExplore={() => setActiveSection('problem')}
+            onNavigateToDownload={() => setActiveSection('download')}
+          />
+        ),
       },
       {
         id: 'problem',
@@ -121,12 +127,22 @@ export function App() {
       {
         id: 'demo',
         name: 'Simulation Demo',
-        component: <Section18InteractiveDemo />,
+        component: <Section18InteractiveDemo onNavigateToDownload={() => setActiveSection('download')} />,
+      },
+      {
+        id: 'download',
+        name: 'Get Verdict',
+        component: <Section19DownloadHub />,
       },
       {
         id: 'final',
         name: 'Conclusion',
-        component: <Section19FinalStatement onScrollToTop={() => setActiveSection('hero')} />,
+        component: (
+          <Section20FinalStatement
+            onScrollToTop={() => setActiveSection('hero')}
+            onNavigateToDownload={() => setActiveSection('download')}
+          />
+        ),
       },
     ],
     []

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { VerdictLogo } from '../components/VerdictLogo';
-import { ShieldCheck, ShieldAlert, Play, Pause, RotateCcw, Lock, Globe, Code2, CreditCard, CheckCircle2, AlertTriangle, XCircle } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, Play, Pause, RotateCcw, Lock, Globe, Code2, CreditCard, CheckCircle2, AlertTriangle, XCircle, Download, ArrowRight } from 'lucide-react';
+
+interface Section18Props {
+  onNavigateToDownload?: () => void;
+}
 
 interface SimulationScenario {
   id: string;
@@ -119,7 +123,7 @@ const SCENARIOS: SimulationScenario[] = [
   },
 ];
 
-export const Section18InteractiveDemo: React.FC = () => {
+export const Section18InteractiveDemo: React.FC<Section18Props> = ({ onNavigateToDownload }) => {
   const [activeScenarioIndex, setActiveScenarioIndex] = useState<number>(0);
   const [replayKey, setReplayKey] = useState<number>(0);
   const [currentTypedUrl, setCurrentTypedUrl] = useState<string>('');
@@ -189,7 +193,7 @@ export const Section18InteractiveDemo: React.FC = () => {
         subtitle="Watch the multimodal engine analyze an authentic payment gateway versus a deceptive phishing clone in real time."
       />
 
-      <div className="cyber-panel p-6 md:p-10 rounded-3xl border border-slate-700 bg-[#090d16]/95 shadow-[0_0_80px_rgba(0,0,0,0.9)] mb-12">
+      <div className="cyber-panel p-6 md:p-10 rounded-3xl border border-slate-700 bg-[#090d16]/95 shadow-[0_0_80px_rgba(0,0,0,0.9)] mb-8">
         
         {/* Simulation Header & Scenario Toggle Controls */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800">
@@ -432,6 +436,34 @@ export const Section18InteractiveDemo: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Direct Transition Strip to Download Section */}
+      {onNavigateToDownload && (
+        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900/80 to-cyan-950/40 border border-emerald-500/30 flex flex-wrap items-center justify-between gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+              <Download className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="font-display font-bold text-white text-sm">
+                Ready to protect your browser in real time?
+              </div>
+              <div className="text-xs font-mono text-slate-400">
+                Install the pre-built Manifest V3 package or spin up the full AI stack locally.
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={onNavigateToDownload}
+            className="px-5 py-2.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-display font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+          >
+            <span>Proceed to Download Hub</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
     </section>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, ArrowDown, Globe, Code2, CreditCard, Sparkles } from 'lucide-react';
+import { Lock, ArrowDown, Globe, Code2, CreditCard, Sparkles, Download, ChevronRight } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 import { CyberTiltCard } from '../components/CyberTiltCard';
 
 interface Section01HeroProps {
   onScrollToExplore: () => void;
+  onNavigateToDownload?: () => void;
 }
 
 const letterVariants: Variants = {
@@ -22,7 +23,7 @@ const letterVariants: Variants = {
   }),
 };
 
-export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore }) => {
+export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore, onNavigateToDownload }) => {
   const [typedUrl, setTypedUrl] = useState('');
   const [activeTab, setActiveTab] = useState<'console' | 'radar'>('console');
   const targetUrl = 'https://api.razorpay.com/v1/checkout/public?order_id=ord_987x9';
@@ -44,7 +45,7 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
 
   return (
     <section id="hero" className="relative flex flex-col justify-between py-2 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
-      
+
       {/* Volumetric Emerald Horizon Glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[550px] bg-gradient-to-b from-emerald-500/20 via-teal-500/10 to-transparent rounded-full blur-[170px] pointer-events-none -z-10 animate-pulse-glow" />
 
@@ -53,7 +54,7 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
 
       {/* Hero Centerpiece */}
       <div className="text-center pt-1 pb-6">
-        
+
         {/* Staggered 3D Kinetic Brand Title */}
         <div className="relative inline-flex items-center justify-center select-none perspective-[1000px]">
           <div className="flex overflow-hidden py-4">
@@ -93,18 +94,44 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
           Evaluating checkout page legitimacy across URL structure, DOM structural integrity, and financial harvesting attack surfaces before credentials leave the browser.
         </motion.p>
 
+        {/* Quick Launch & Download Action CTA Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.88 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3.5"
+        >
+          {onNavigateToDownload && (
+            <button
+              onClick={onNavigateToDownload}
+              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 text-slate-950 font-display font-extrabold text-sm tracking-wide hover:brightness-110 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <Download className="w-4 h-4" />
+              <span>Get Verdict</span>
+            </button>
+          )}
+
+          <button
+            onClick={onScrollToExplore}
+            className="px-6 py-3 rounded-2xl bg-slate-900/80 border border-slate-700/90 text-slate-200 hover:text-white hover:bg-slate-800 hover:border-slate-500 font-mono text-xs font-semibold tracking-wider uppercase transition-all flex items-center gap-2 cursor-pointer backdrop-blur-md"
+          >
+            <span>Explore Architecture</span>
+            <ChevronRight className="w-4 h-4 text-emerald-400" />
+          </button>
+        </motion.div>
+
         {/* The Centerpiece: Beast-Tier Holographic Gateway Inspection Console */}
         <motion.div
           initial={{ opacity: 0, y: 45, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-12 max-w-5xl mx-auto w-full"
+          className="mt-10 max-w-5xl mx-auto w-full"
         >
           <div className="relative rounded-3xl p-1 bg-gradient-to-b from-slate-700/80 via-emerald-500/30 to-slate-900/80 shadow-[0_30px_100px_rgba(0,0,0,0.95)]">
-            
+
             {/* Specular Inner Console Frame */}
             <div className="rounded-[22px] overflow-hidden bg-[#070b14]/95 backdrop-blur-2xl border border-slate-800 text-left">
-              
+
               {/* Console Top Toolbar */}
               <div className="px-6 py-3.5 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
@@ -126,17 +153,15 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
                 <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800">
                   <button
                     onClick={() => setActiveTab('console')}
-                    className={`px-3 py-1 rounded text-[11px] font-mono cursor-pointer transition-all ${
-                      activeTab === 'console' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-slate-400 hover:text-white'
-                    }`}
+                    className={`px-3 py-1 rounded text-[11px] font-mono cursor-pointer transition-all ${activeTab === 'console' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-slate-400 hover:text-white'
+                      }`}
                   >
                     MULTIMODAL STACK
                   </button>
                   <button
                     onClick={() => setActiveTab('radar')}
-                    className={`px-3 py-1 rounded text-[11px] font-mono cursor-pointer transition-all ${
-                      activeTab === 'radar' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-slate-400 hover:text-white'
-                    }`}
+                    className={`px-3 py-1 rounded text-[11px] font-mono cursor-pointer transition-all ${activeTab === 'radar' ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30' : 'text-slate-400 hover:text-white'
+                      }`}
                   >
                     TELEMETRY LOGS
                   </button>
@@ -145,10 +170,10 @@ export const Section01Hero: React.FC<Section01HeroProps> = ({ onScrollToExplore 
 
               {/* Console Body Area */}
               <div className="p-6 md:p-8 space-y-6">
-                
+
                 {activeTab === 'console' ? (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    
+
                     {/* Core 01: URL AI */}
                     <CyberTiltCard glowColor="cyan" className="p-5">
                       <div className="flex items-center justify-between font-mono text-xs mb-3">

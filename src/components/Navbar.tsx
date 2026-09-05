@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { VerdictLogo } from './VerdictLogo';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Download } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
@@ -57,14 +57,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
           </button>
 
           {/* Desktop Navigation Links with Magnetic Floating Active Pill */}
-          <div className="hidden md:flex items-center gap-1 bg-slate-900/50 p-1 rounded-full border border-white/[0.05]">
+          <div className="hidden lg:flex items-center gap-1 bg-slate-900/50 p-1 rounded-full border border-white/[0.05]">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => onNavigate(item.id)}
-                  className={`relative px-3.5 py-1.5 text-xs font-mono rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap z-10 ${
+                  className={`relative px-3 py-1.5 text-xs font-mono rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap z-10 ${
                     isActive
                       ? 'text-slate-950 font-bold'
                       : 'text-slate-400 hover:text-white font-medium'
@@ -83,14 +83,30 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onNavigate }) => 
             })}
           </div>
 
-          {/* Right Action: Direct Jump to Dual Verification Demo */}
+          {/* Right Action: Direct Jump to Demo & Download Hub */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => onNavigate('demo')}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/60 hover:shadow-[0_0_15px_rgba(16,185,129,0.25)] transition-all cursor-pointer"
+              className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-semibold transition-all cursor-pointer ${
+                activeSection === 'demo'
+                  ? 'text-emerald-300 bg-emerald-500/20 border border-emerald-400/60 shadow-[0_0_12px_rgba(16,185,129,0.25)]'
+                  : 'text-slate-300 bg-slate-900/80 border border-slate-700/80 hover:bg-slate-800 hover:text-white'
+              }`}
             >
               <span>Demo</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />
+            </button>
+
+            <button
+              onClick={() => onNavigate('download')}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
+                activeSection === 'download'
+                  ? 'text-slate-950 bg-emerald-400 shadow-[0_0_18px_rgba(16,185,129,0.6)]'
+                  : 'text-emerald-300 bg-emerald-500/15 border border-emerald-500/35 hover:bg-emerald-500/25 hover:border-emerald-400/70 hover:shadow-[0_0_16px_rgba(16,185,129,0.3)]'
+              }`}
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Get Verdict</span>
             </button>
           </div>
 
